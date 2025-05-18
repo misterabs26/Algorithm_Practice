@@ -79,3 +79,29 @@ while True:
         print("Please enter a valid number only")
 
 
+    # ------- RECURSION --------
+    # Without using recursion
+
+    def pyramid(height):
+        # Outer Loop: number of layers
+        for i in range(height):
+            spaces = " " * (height - i - 1)
+            stars = "*" * (i*2 + 1)
+            print(spaces + stars + spaces)
+
+        print("\n")
+    print("Pyramid without recursive call")
+    pyramid(5)
+
+    # with recursion
+    def recursive_pyramid(height, counter=0):
+        if counter == height:
+            return
+        spaces = " " * (height - counter - 1)
+        stars = "*" * (counter * 2 + 1)
+        print(spaces + stars + spaces)
+        recursive_pyramid(height, counter+1)
+
+
+    print("Recursive pyramid\n")
+    recursive_pyramid(6)
