@@ -37,6 +37,44 @@ print(f"Original values: {options}")
 print(f"Sorted values (selection sort): {selection_sort(options)}")
 print(f"Sorted values (bubble sort): {bubble_sort(options)}")
 
+
+# MERGE SORT
+unsorted_array = [51,23,7,14,1,6,3,0]
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        middle = len(arr) // 2
+
+        # separate halves to each array
+        left_half = merge_sort(arr[:middle])
+        right_half = merge_sort(arr[middle:])
+
+        temp = []
+        i = j = 0
+
+        # check if each part has only one element
+        while i < len(left_half) and j < len(right_half):
+
+            # compare the values of each part then append to a new list
+            if left_half[i] < right_half[j]:
+                temp.append(left_half[i])
+                i += 1
+            else:
+                temp.append(right_half[j])
+                j += 1
+
+        # uses extend function instead of append
+        # if append is used, it will return a nested list
+        temp.extend(left_half[i:])
+        temp.extend(right_half[j:])
+
+        return temp
+
+
+print(f"This is the unsorted array: {unsorted_array}")
+print(f"Merge sort result: {merge_sort(unsorted_array)}")
 # ---------------------------------------------------------------------------------
 # SEARCH ALGORITHMS
 
@@ -95,13 +133,21 @@ while True:
 
     # with recursion
     def recursive_pyramid(height, counter=0):
-        if counter == height:
+        if height <=0:
+            print("Height must be a positive value")
             return
+
+        if counter == height:
+             return # means it will stop the recursion
         spaces = " " * (height - counter - 1)
         stars = "*" * (counter * 2 + 1)
+
         print(spaces + stars + spaces)
+
+        # calling the function itself
         recursive_pyramid(height, counter+1)
 
 
     print("Recursive pyramid\n")
-    recursive_pyramid(6)
+    recursive_pyramid(3)
+
